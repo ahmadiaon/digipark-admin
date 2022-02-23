@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Str;
 use App\Models\Gallery;
 use App\Models\Community;
 use App\Models\CommunityCategory;
@@ -59,7 +60,32 @@ class ManageCommunityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name'                      => 'required|max:255',
+            'community_category_uuid'    => 'required|exists:business_categories,uuid',
+            'logo_path'                 => 'required',
+            'description'               => 'required',
+            'address'                   => 'required',
+            'city'                      => 'required',
+            'province'                  => 'required',
+            'location'                  => 'required',
+            'instagram'                 => 'required',
+            'facebook'                  => 'required',
+            'youtube'                   => 'required',
+            'image_path'                => 'required',
+            'status'                    => 'required'
+        ]);
+        $myArray = explode(',', $validatedData['image_path']);
+        $validatedData['image_path'] = "";
+        foreach ($myArray as $value) {
+            $validatedData['image_path'] = $validatedData['image_path'] . ',"' . $value . '"';
+        }
+        $str = ltrim($validatedData['image_path'], ',');
+        $validatedData['image_path'] = '[' . $str . ']';
+        $validatedData['uuid']  = Str::uuid();
+
+        Community::create($validatedData);
+        return redirect('/community')->with('success', 'New Community Inserted!');
     }
 
     /**

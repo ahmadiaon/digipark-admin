@@ -35,6 +35,30 @@
         <div class="row">
             <div class="col-md-12 col-sm-12">
                 <div class="form-group">
+                    <label>Pilih Logo</label>
+                    <select name="logo_path" class="custom-select2 form-control  @error('logo_path') is-invalid @enderror" name="state" style="width: 100%; height: 38px;">
+                        <optgroup label="Media dari gallery">
+                            <option value="null">Pilih Media</option>
+                            @foreach($galleries as $gallery)
+                                @if(old('logo_path' ) == $gallery->uuid)
+                                    <option selected value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
+                                @else
+                                    <option  value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
+                                @endif
+                                    @endforeach
+                        </optgroup>
+                    </select>
+                    @error('gallery')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12">
+                <div class="form-group">
                     <label>Deskripsi</label>
                     <textarea name="description" class="form-control"></textarea>
                 </div>
