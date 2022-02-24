@@ -10,6 +10,7 @@ use App\Http\Controllers\ManageBusinessCategoryController;
 use App\Http\Controllers\ManageBusinessController;
 use App\Http\Controllers\ManageCommunityCategoryController;
 use App\Http\Controllers\ManageCommunityController;
+use App\Http\Controllers\ManageCommunityRegisterController;
 use App\Http\Controllers\ManageGalerryController;
 use App\Http\Controllers\ManageNewsController;
 use App\Http\Controllers\ManageSlideController;
@@ -61,3 +62,6 @@ Route::get('/community-category-data', [ManageCommunityCategoryController::class
 
 Route::resource('/community', ManageCommunityController::class);
 Route::get('/community-data', [ManageCommunityController::class, 'anyData'])->name('community-data');
+
+Route::resource('/community-registers', ManageCommunityRegisterController::class);
+Route::get('/community-registers-data', [ManageCommunityRegisterController::class, 'anyData'])->name('community-registers-data');

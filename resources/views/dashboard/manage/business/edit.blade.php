@@ -35,12 +35,13 @@
                 <div class="form-group">
                     <label>Judul</label>
                     <input required name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name',$business->name) }}">
+                    @error('name')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
-                @error('nane')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+
             </div>
         </div>
         <div class="row">
@@ -49,6 +50,11 @@
                     <label>Deskripsi</label>
                     <textarea name="description" class="form-control @error('description') is-invalid @enderror" >{{ old('description',$business->name) }}</textarea>
                 </div>
+                @error('description')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
         </div>
         <div class="row">
@@ -56,6 +62,11 @@
                 <div class="form-group">
                     <label>Alamat</label>
                     <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" value="{{ old('address',$business->address) }}">
+                    @error('address')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">

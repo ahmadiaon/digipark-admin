@@ -9,46 +9,34 @@
         <div class="pull-left">
             <h4 class="text-blue h4">Komunitas Baru</h4>
         </div>
-
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
     </div>
     <form action="/community" method="post" id="main_form">
         @csrf
         <div class="row">
             <div class="col-md-3 col-sm-12">
                 <div class="form-group">
-                    <label>Kategori UMKM</label>
+                    <label>Kategori Community</label>
                     <select name="community_category_uuid" class="form-control">
                         @foreach($categories as $category)
                             <option selected value="{{ $category->uuid }}">{{ $category->category }}</option>
                         @endforeach
-
                     </select>
                 </div>
             </div>
             <div class="col-md-9 col-sm-12">
                 <div class="form-group">
                     <label>Judul</label>
-                    <input required name="name" type="text" class="form-control">
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12 col-sm-12">
-                <div class="form-group">
-                    <label>Pilih Logo</label>
-                    <select name="logo_path" class="custom-select2 form-control  @error('logo_path') is-invalid @enderror" name="state" style="width: 100%; height: 38px;">
-                        <optgroup label="Media dari gallery">
-                            <option value="null">Pilih Media</option>
-                            @foreach($galleries as $gallery)
-                                @if(old('logo_path' ) == $gallery->uuid)
-                                    <option selected value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
-                                @else
-                                    <option  value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
-                                @endif
-                                    @endforeach
-                        </optgroup>
-                    </select>
-                    @error('gallery')
+                    <input name="name" type="text" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+                    @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -61,6 +49,11 @@
                 <div class="form-group">
                     <label>Deskripsi</label>
                     <textarea name="description" class="form-control"></textarea>
+                    @error('description')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -69,12 +62,22 @@
                 <div class="form-group">
                     <label>Alamat</label>
                     <input name="address" type="text" class="form-control">
+                    @error('address')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <label>Kabupaten/Kota</label>
                     <input required name="city" type="text" class="form-control" value="Palangka Raya">
+                    @error('city')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -83,12 +86,22 @@
                 <div class="form-group">
                     <label>Provinsi</label>
                     <input required name="province" type="text" class="form-control" value="Kalimantan Tengah">
+                    @error('province')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
                     <label>Url Google Maps</label>
                     <input required name="location" type="text" class="form-control">
+                    @error('location')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
         </div>
@@ -115,10 +128,27 @@
             </div>
             <div class="col-md-6 col-sm-12">
                 <div class="form-group">
-                    <label>No Whatsapp</label>
-                    <input required name="whatsapp" type="text" class="form-control">
+                    <label>Pilih Logo</label>
+                    <select name="logo_path" class="custom-select2 form-control  @error('logo_path') is-invalid @enderror" name="state" style="width: 100%; height: 38px;">
+                        <optgroup label="Media dari gallery">
+                            <option value="null">Pilih Media</option>
+                            @foreach($galleries as $gallery)
+                                @if(old('logo_path' ) == $gallery->uuid)
+                                    <option selected value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
+                                @else
+                                    <option  value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
+                                @endif
+                                    @endforeach
+                        </optgroup>
+                    </select>
+                    @error('gallery')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
+
         </div>
         <div class="form-group">
             <label>Pilih Media</label>

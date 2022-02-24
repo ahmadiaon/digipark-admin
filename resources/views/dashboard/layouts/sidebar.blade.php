@@ -29,7 +29,7 @@
 						<span class="micon dw dw-chat3"></span><span class="mtext">Komunitas</span>
 					</a>
 					<ul class="submenu">
-						<li><a href="komunitas-datatable-pendaftaran.php">Pendaftaran</a></li>
+						<li><a href="/community-registers">Pendaftaran</a></li>
 						<li><a href="/community">Konten</a></li>
 						<li><a href="/community-category">Kategori</a></li>
 					</ul>

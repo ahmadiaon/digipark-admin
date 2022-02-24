@@ -62,7 +62,7 @@ class ManageCommunityController extends Controller
     {
         $validatedData = $request->validate([
             'name'                      => 'required|max:255',
-            'community_category_uuid'    => 'required|exists:business_categories,uuid',
+            'community_category_uuid'    => 'required|exists:community_categories,uuid',
             'logo_path'                 => 'required',
             'description'               => 'required',
             'address'                   => 'required',
@@ -96,7 +96,6 @@ class ManageCommunityController extends Controller
      */
     public function show(Community $community)
     {
-        //
     }
 
     /**
@@ -107,7 +106,16 @@ class ManageCommunityController extends Controller
      */
     public function edit(Community $community)
     {
-        //
+        $str = ltrim($community->image_path, '[');
+        $str1 = substr($str, 0, -1);
+        $myArray = explode(',', $str1);
+        return view('dashboard.manage.community.edit', [
+            'title'     => 'Edit',
+            'galleries' => Gallery::latest()->get(),
+            'community'      => $community,
+            'categories' => CommunityCategory::latest()->get(),
+            'image_paths' => $myArray
+        ]);
     }
 
     /**
@@ -119,7 +127,32 @@ class ManageCommunityController extends Controller
      */
     public function update(Request $request, Community $community)
     {
-        //
+        $validatedData = $request->validate([
+            'name'                      => 'required|max:255',
+            'community_category_uuid'    => 'required|exists:community_categories,uuid',
+            'description'               => 'required',
+            'address'                   => 'required',
+            'instagram'                 => '',
+            'youtube'                   => '',
+            'facebook'                  => '',
+            'location'                  => '',
+            'youtube'                   => '',
+            'logo_path'                 => '',
+            'city'                      => 'required',
+            'province'                  => 'required',
+            'image_path'                => 'required',
+            'status'                    => 'required',
+        ]);
+        $myArray = explode(',', $validatedData['image_path']);
+        $validatedData['image_path'] = "";
+        foreach ($myArray as $value) {
+            $validatedData['image_path'] = $validatedData['image_path'] . ',"' . $value . '"';
+        }
+        $str = ltrim($validatedData['image_path'], ',');
+        $validatedData['image_path'] = '[' . $str . ']';
+
+        Community::where('id', $community->id)->update($validatedData);
+        return redirect('/community')->with('success', 'News Edited!');
     }
 
     /**
@@ -130,6 +163,7 @@ class ManageCommunityController extends Controller
      */
     public function destroy(Community $community)
     {
-        //
+        Community::destroy($community->id);
+        return redirect('/community/')->with('success', 'Community has been Deleted!');
     }
 }
