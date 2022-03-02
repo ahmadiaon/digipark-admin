@@ -14,7 +14,22 @@ class CreateFinancialsTable extends Migration
     public function up()
     {
         Schema::create('financials', function (Blueprint $table) {
-            $table->id();
+            // primary
+            $table->bigIncrements('id');
+            $table->string('uuid')->unique();
+
+            // secondary
+            $table->string('name')->nullable();
+            $table->text('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('province')->nullable();
+            $table->text('description')->nullable();
+            $table->text('image_path')->nullable();
+            $table->text('location')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('youtube')->nullable();
+            $table->tinyInteger('status')->nullable();
             $table->timestamps();
         });
     }

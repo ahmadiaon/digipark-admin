@@ -48,6 +48,16 @@
 						<li><a href="/business-category">Kategori</a></li>
 					</ul>
 				</li>
+                <li class="dropdown">
+					<a href="javascript:;" class="dropdown-toggle">
+						<span class="micon dw dw-apartment"></span><span class="mtext">Financial</span>
+					</a>
+					<ul class="submenu">
+						<li><a href="/financial">Konten</a></li>
+						<li><a href="/financial-loan">Peminjaman</a></li>
+						<li><a href="/registration-loan">Pendaftaran</a></li>
+					</ul>
+				</li>
 				<li class="dropdown">
 					<a href="javascript:;" class="dropdown-toggle">
 						<span class="micon dw dw-invoice"></span><span class="mtext">Info</span>
@@ -56,7 +66,11 @@
 						<li><a href="/news">Berita</a></li>
 					</ul>
 				</li>
-
+                <li>
+					<a href="/tour" class="dropdown-toggle no-arrow">
+						<span class="micon dw dw-browser2"></span><span class="mtext">Ulasan</span>
+					</a>
+				</li>
 			</ul>
 		</div>
 	</div>

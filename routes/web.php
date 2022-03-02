@@ -11,6 +11,7 @@ use App\Http\Controllers\ManageBusinessController;
 use App\Http\Controllers\ManageCommunityCategoryController;
 use App\Http\Controllers\ManageCommunityController;
 use App\Http\Controllers\ManageCommunityRegisterController;
+use App\Http\Controllers\ManageFinancialController;
 use App\Http\Controllers\ManageGalerryController;
 use App\Http\Controllers\ManageNewsController;
 use App\Http\Controllers\ManageSlideController;
@@ -31,9 +32,7 @@ use Yajra\Datatables\Datatables;
 
 Route::get('/', [DashboardController::class, 'index']);
 Route::resource('/users', ManageUserController::class);
-
-Route::resource('slides', AdminManageSlideController::class);
-Route::get('/data', [ManageUserController::class, 'anyData'])->name('data');
+Route::get('/-data', [ManageUserController::class, 'anyData'])->name('data');
 
 Route::resource('/gallery', ManageGalerryController::class);
 Route::get('/galleries-data', [ManageGalerryController::class, 'anyData'])->name('galleries_data');
@@ -42,7 +41,7 @@ Route::resource('/admin', ManageAdminController::class);
 Route::get('/admin-data', [ManageAdminController::class, 'anyData'])->name('admin-data');
 
 
-Route::resource('/slide', ManageSlideController::class);
+Route::resource('/slides', ManageSlideController::class);
 Route::get('/slide-data', [ManageSlideController::class, 'anyData'])->name('slide-data');
 
 Route::resource('/news', ManageNewsController::class);
@@ -56,6 +55,7 @@ Route::get('/business-data', [ManageBusinessController::class, 'anyData'])->name
 
 Route::resource('/tour', ManageTourController::class);
 Route::get('/tour-data', [ManageTourController::class, 'anyData'])->name('tour-data');
+Route::get('/api-data', [ManageTourController::class, 'listTourUser']);
 
 Route::resource('/community-category', ManageCommunityCategoryController::class);
 Route::get('/community-category-data', [ManageCommunityCategoryController::class, 'anyData'])->name('community-category-data');
@@ -65,3 +65,6 @@ Route::get('/community-data', [ManageCommunityController::class, 'anyData'])->na
 
 Route::resource('/community-registers', ManageCommunityRegisterController::class);
 Route::get('/community-registers-data', [ManageCommunityRegisterController::class, 'anyData'])->name('community-registers-data');
+
+Route::resource('/financial', ManageFinancialController::class);
+Route::get('/financial-data', [ManageFinancialController::class, 'anyData'])->name('financial-data');

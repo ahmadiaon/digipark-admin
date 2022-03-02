@@ -15,20 +15,17 @@ class ManageUserController extends Controller
     {
         return view('dashboard.manage.user.index', [
             'title'         => 'Users',
-            // 'users'         => User::get()
-            // 'users'         => User::select('name', 'email', 'phone_number')->get()->paginate(7)->withQueryString()
         ]);
     }
 
-
     public function anyData()
     {
+
         return Datatables::of(User::latest())
             ->addColumn('action', function ($model) {
+                $aaa = "a";
                 return '<a class="text-decoration-none" href="/users/' . $model->id . '/edit"><button class="btn btn-warning py-1 px-2 mr-1"><i class="icon-copy dw dw-pencil"></i></button></a>
-                <form action="/users/' . $model->id . '" method="post" id="delete-data" class="d-inline">' . csrf_field() .
-                    method_field('delete') . '<button onclick="JSconfirm()" type="submit" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>
-                </form>';
+                <button onclick="myFunction(' . $model->id . ')"  type="button" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>';
             })
             ->addColumn('image', function ($model) {
                 return '

@@ -14,16 +14,21 @@ class CreateReviewsTable extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            // primary
+            $table->bigIncrements('id');
+            $table->string('uuid')->unique();
+            $table->string('business_category_uuid')->nullable();
+            $table->string('user_uuid')->nullable();
+
+
+            $table->text('image_path')->nullable();
+            $table->text('description')->nullable();
+            $table->tinyInteger('value')->nullable();
+            $table->tinyInteger('status')->nullable();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('reviews');

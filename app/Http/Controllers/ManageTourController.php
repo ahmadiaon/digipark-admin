@@ -50,6 +50,7 @@ class ManageTourController extends Controller
             ->make(true);
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -171,5 +172,55 @@ class ManageTourController extends Controller
     {
         Tour::destroy($tour->id);
         return redirect('/tour/')->with('success', 'Tour has been Deleted!');
+    }
+
+
+
+
+
+
+    public function listTourUser()
+    {
+        $tours = Tour::latest()->get();
+        $validatedData['image_path'] = "";
+        $images = [];
+        // ddd($tours);
+        foreach ($tours as $tour) {
+            $str = ltrim($tour->image_path, '[');
+            $str1 = substr($str, 0, -1);
+            $myArray = explode(',', $str1);
+            // ddd($myArray);
+            foreach($myArray as $dataArray){
+                $image = ltrim($dataArray, '"');
+                $image = substr($image, 0, -1);
+                // ddd($image);
+                $galery = Gallery::where('uuid', $image)->first();
+                $validatedData['image_path'] = $validatedData['image_path'] . ',"' . $galery->path . '"';
+                $images[] = $galery->path;
+            }
+            // ddd($images);
+            $str = ltrim($validatedData['image_path'], ',');
+
+            $image = $myArray[0];
+            $image = ltrim($image, '"');
+            $image = substr($image, 0, -1);
+            $galery = Gallery::where('uuid',  $image)->first();
+            $galery = $galery->path;
+            $toursNew[] = $tour;
+            $toursNew[] = ['Amount' => $galery, $tour];
+            $tour->image_path = $images;
+        }
+        // ddd($tours);
+
+        $meta = [
+            'message' => "List all tours",
+            'code'  => 200,
+            'status'  => "success"
+        ];
+        $response = [
+            'meta'  => $meta,
+            'data'  => $tours
+        ];
+        return response()->json($response, 200);
     }
 }

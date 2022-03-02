@@ -2,58 +2,128 @@
 @section('container')
 <div class="pd-20 card-box mb-30">
     <div class="clearfix">
-        <div class="">
-            <h4 class="text-blue h4">Tambah Slide</h4>
-            <p class="mb-30">Silahkan Lengkapi data dibawah ini</p>
-            <form action="/news" method="post" id="main_form">
-                   @csrf
-                   <div class="form-group">
-                    <label>Judul Berita</label>
-                    <input required autofocus name="title" class="form-control   @error('title') is-invalid @enderror" value="{{ old('title') }}" type="text" placeholder="Masukan Nama Lengkap" >
-                    @error('title')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+
+        <!-- Form grid Start -->
+        <div class="pd-20 card-box mb-30">
+            <div class="clearfix">
+                <div class="pull-left">
+                    <h4 class="text-blue h4">Konten Tour Baru</h4>
                 </div>
-                <div class="html-editor pd-20 card-box mb-30">
-					<h4 class="h4 text-blue">Konten Berita</h4>
-					<textarea required name="content" class="textarea_editor form-control border-radius-0" placeholder="Enter text ..."></textarea>
-				</div>
+
+            </div>
+            <form action="/tour" method="post" id="main_form">
+                @csrf
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label>Judul</label>
+                            <input required name="name" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="form-group">
+                            <label>Deskripsi</label>
+                            <textarea name="description" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Alamat</label>
+                            <input name="address" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Kabupaten/Kota</label>
+                            <input required name="city" type="text" class="form-control" value="Palangka Raya">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Provinsi</label>
+                            <input required name="province" type="text" class="form-control" value="Kalimantan Tengah">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Url Google Maps</label>
+                            <input required name="location" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Url Instagram</label>
+                            <input required name="instagram" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Url Facebook</label>
+                            <input required name="facebook" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Url Youtube</label>
+                            <input required name="youtube" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-12">
+                        <div class="form-group">
+                            <label>Tampilkan</label>
+                            <select name="status" class="form-control">
+                                <option value="1">Ya</option>
+                                <option value="0">Tidak</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
                 <div class="form-group">
-                    <label>Multiple Select</label>
+                    <label>Pilih Media</label>
                     <input id="selects" name="image_path" type="hidden" value="">
-                    <select required id="select-meal-type"  class="custom-select2 form-control" multiple="multiple" style="width: 100%;">
+                    <select required id="select-meal-type" class="custom-select2 form-control" multiple="multiple"
+                        style="width: 100%;">
                         <option value="null">Pilih Media</option>
-                            @foreach($galleries as $gallery)
-                                @if(old('gallery' ) == $gallery->uuid)
-                                    <option selected value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
-                                @else
-                                    <option  value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
-                                @endif
-                            @endforeach
+                        @foreach($galleries as $gallery)
+                        @if(old('gallery' ) == $gallery->uuid)
+                        <option selected value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
+                        @else
+                        <option value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
+                        @endif
+                        @endforeach
                     </select>
                 </div>
-                <div class="form-group ">
-                    <label>Status</label>
-                    <select required name="status" class="form-control  @error('status') is-invalid @enderror">
-                        <option value="1" {{ (old("status") == "1" ? "selected":"") }}>Aktif</option>
-                        <option value="0" {{ (old("status") == "0" ? "selected":"") }}>Tidak Aktif</option>
-                    </select>
-                    @error('status')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+                <div class="modal-footer">
+                    <a href="/business/">
+                        <button type="button" id="modalClose" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                    </a>
+                    <button id="submit" class="btn btn-primary">Save changes</button>
                 </div>
-               <div class="modal-footer">
-                   <a href="/slide/">
-                        <button type="button" id="modalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                   </a>
-                   <button id="submit"  class="btn btn-primary">Save changes</button>
-               </div>
-           </form>
+            </form>
+            <div class="collapse collapse-box" id="form-grid-form">
+                <div class="code-box">
+                    <div class="clearfix">
+                        <a href="javascript:;" class="btn btn-primary btn-sm code-copy pull-left"
+                            data-clipboard-target="#form-grid"><i class="fa fa-clipboard"></i> Copy Code</a>
+                        <a href="#form-grid-form" class="btn btn-primary btn-sm pull-right" rel="content-y"
+                            data-toggle="collapse" role="button"><i class="fa fa-eye-slash"></i> Hide Code</a>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!-- Form grid End -->
     </div>
 </div>
 @endsection

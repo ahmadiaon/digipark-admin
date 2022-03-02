@@ -125,7 +125,7 @@
             </select>
         </div>
         <div class="modal-footer">
-            <a href="/business/">
+            <a href="/tour/">
                     <button type="button" id="modalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </a>
             <button id="submit"  class="btn btn-primary">Save changes</button>
