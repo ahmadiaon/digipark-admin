@@ -18,7 +18,9 @@
         <table id="myTablse" class="table table-stripped">
             <thead>
                 <tr>
-                    <th width="20%">Nama</th>
+                    <th width="20%">User</th>
+                    <th width="20%">UMKM</th>
+                    <th width="20%">Skor</th>
                     <th width="20%">Aktif</th>
                     <th width="12%">Aksi</th>
                 </tr>

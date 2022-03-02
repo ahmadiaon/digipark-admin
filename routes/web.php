@@ -14,6 +14,7 @@ use App\Http\Controllers\ManageCommunityRegisterController;
 use App\Http\Controllers\ManageFinancialController;
 use App\Http\Controllers\ManageGalerryController;
 use App\Http\Controllers\ManageNewsController;
+use App\Http\Controllers\ManageReviewController;
 use App\Http\Controllers\ManageSlideController;
 use App\Http\Controllers\ManageTourController;
 use App\Http\Controllers\ManageUserController;
@@ -68,3 +69,6 @@ Route::get('/community-registers-data', [ManageCommunityRegisterController::clas
 
 Route::resource('/financial', ManageFinancialController::class);
 Route::get('/financial-data', [ManageFinancialController::class, 'anyData'])->name('financial-data');
+
+Route::resource('/review', ManageReviewController::class);
+Route::get('/review-data', [ManageReviewController::class, 'anyData'])->name('review-data');

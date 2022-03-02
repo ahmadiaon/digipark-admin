@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
             // primary
             $table->bigIncrements('id');
             $table->string('uuid')->unique();
-            $table->string('business_category_uuid')->nullable();
+            $table->string('business_uuid')->nullable();
             $table->string('user_uuid')->nullable();
 
 
