@@ -25,6 +25,7 @@ class CreateReviewsTable extends Migration
             $table->text('description')->nullable();
             $table->tinyInteger('value')->nullable();
             $table->tinyInteger('status')->nullable();
+            $table->timestamps();
         });
     }
 
