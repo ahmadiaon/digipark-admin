@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommunityRegistersTable extends Migration
+class CreateFinancialServiceSubmissionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,22 @@ class CreateCommunityRegistersTable extends Migration
      */
     public function up()
     {
-        Schema::create('community_registers', function (Blueprint $table) {
+        Schema::create('financial_service_submissions', function (Blueprint $table) {
             // primary
             $table->bigIncrements('id');
             $table->string('uuid')->unique();
-            $table->string('community_uuid')->nullable();
+            $table->string('financial_service_uuid')->nullable();
             $table->string('user_uuid')->nullable();
 
             // secondary
             $table->string('name')->nullable();
-            $table->string('email')->nullable();
-            $table->integer('age')->nullable();
-            $table->string('phone_number')->nullable();
-
-            $table->string('facebook')->nullable();
-            $table->string('instagram')->nullable();
-
-            $table->tinyInteger('check1')->nullable();
-            $table->tinyInteger('check2')->nullable();
-            $table->tinyInteger('status')->nullable();
+            $table->string('address')->nullable();
+            $table->string('business_name')->nullable();
+            $table->string('business_address')->nullable();
+            $table->string('income')->nullable();
+            $table->integer('loan_estimate')->nullable();
+            $table->string('purpose')->nullable();
+            $table->text('identity_card')->nullable();
 
             // timestamp
             $table->timestamps();
@@ -45,6 +42,6 @@ class CreateCommunityRegistersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('community_registers');
+        Schema::dropIfExists('financial_service_submissions');
     }
 }
