@@ -20,27 +20,28 @@
 
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
-							<label id = "GFG">Silahkan Masukan Gambar</label>
-							<div class="custom-file">
-								<input  onchange="previewImage(this.value)"  name="content" id="file" type="file" class="custom-file-input  @error('content') is-invalid @enderror">
-								<label id="III" class="custom-file-label">Choose file</label>
+                            <label id="GFG">Silahkan Masukan Gambar</label>
+                            <div class="custom-file">
+                                <input onchange="previewImage(this.value)" name="content" id="file" type="file"
+                                    class="custom-file-input  @error('content') is-invalid @enderror">
+                                <label id="III" class="custom-file-label">Choose file</label>
                                 <div class="da-card-photo">
                                     <div class="container">
                                         <div class="row">
                                             <div class="col col-lg-8">
-                                                <img class="rounded mt-3" height="50px" id="showImage" src="" alt="" >
+                                                <img class="rounded mt-3" height="50px" id="showImage" src="" alt="">
                                             </div>
                                         </div>
                                     </div>
 
                                 </div>
                                 @error('content')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
+                                <div class="invalid-feedback">
+                                    {{ $message }}
+                                </div>
                                 @enderror
                             </div>
-						</div>
+                        </div>
 
                     </div>
                 </div>
@@ -73,11 +74,12 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Nama Media</label>
-                            <input required value="{{ old('name') }}" name="name" type="text" class="form-control @error('name') is-invalid @enderror">
+                            <input required value="{{ old('name') }}" name="name" type="text"
+                                class="form-control @error('name') is-invalid @enderror">
                             @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
                             @enderror
                         </div>
                     </div>
@@ -130,4 +132,3 @@
     }
 </script>
 @endsection
-

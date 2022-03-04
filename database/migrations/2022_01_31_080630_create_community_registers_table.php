@@ -20,7 +20,6 @@ class CreateCommunityRegistersTable extends Migration
             $table->string('community_uuid')->nullable();
             $table->string('user_uuid')->nullable();
 
-
             // secondary
             $table->string('name')->nullable();
             $table->string('email')->nullable();
@@ -29,7 +28,6 @@ class CreateCommunityRegistersTable extends Migration
 
             $table->string('facebook')->nullable();
             $table->string('instagram')->nullable();
-            $table->string('youtube')->nullable();
 
             $table->tinyInteger('check1')->nullable();
             $table->tinyInteger('check2')->nullable();
