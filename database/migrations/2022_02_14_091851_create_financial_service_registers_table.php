@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFinancialsTable extends Migration
+class CreateFinancialServiceRegistersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,22 @@ class CreateFinancialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('financials', function (Blueprint $table) {
+        Schema::create('financial_service_registers', function (Blueprint $table) {
             // primary
             $table->bigIncrements('id');
             $table->string('uuid')->unique();
+            $table->string('financial_service_uuid')->nullable();
+            $table->string('user_uuid')->nullable();
 
             // secondary
             $table->string('name')->nullable();
-            $table->text('address')->nullable();
-            $table->string('city')->nullable();
-            $table->string('province')->nullable();
-            $table->text('description')->nullable();
-            $table->text('image_path')->nullable();
-            $table->text('location')->nullable();
-            $table->string('facebook')->nullable();
-            $table->string('instagram')->nullable();
-            $table->string('youtube')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('email')->nullable();
+            $table->string('profession')->nullable();
             $table->tinyInteger('status')->nullable();
+
+            // timestamp
             $table->timestamps();
         });
     }
@@ -41,6 +40,6 @@ class CreateFinancialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('financials');
+        Schema::dropIfExists('financial_service_registers');
     }
 }
