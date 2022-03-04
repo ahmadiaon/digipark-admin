@@ -7,12 +7,14 @@ use App\Models\BusinessCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Gallery;
+use Illuminate\Support\Facades\DB;
 use Yajra\Datatables\Datatables;
 
 class ManageBusinessController extends Controller
 {
     public function index()
     {
+
         return view('dashboard.manage.business.index', [
             'title'         => 'Business',
 
@@ -25,16 +27,14 @@ class ManageBusinessController extends Controller
         return Datatables::of(Business::join('business_categories', 'business_categories.uuid', '=', 'businesses.business_category_uuid')->get(['businesses.*', 'business_categories.category']))
             ->addColumn('action', function ($model) {
                 return '<a class="text-decoration-none" href="/business/' . $model->id . '/edit"><button class="btn btn-warning py-1 px-2 mr-1"><i class="icon-copy dw dw-pencil"></i></button></a>
-                <form action="/business/' . $model->id . '" method="post" id="delete-data" class="d-inline">' . csrf_field() .
-                    method_field('delete') . '<button onclick="JSconfirm()" type="submit" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>
-                </form>';
+                <button onclick="myFunction(' . $model->id . ')"  type="button" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>';
             })
             ->addColumn('image', function ($model) {
                 return '
                 <div class="user-info-dropdown">
                     <a class="dropdown-toggle" >
                         <span class="user-icon">
-                            <img src=" http://digipark-admin.test/vendors/images/photo1.jpg" alt="">
+                            <img src="'.env("APP_URL").'/'.$model->path.'" alt="">
                         </span>
                     </a>
                 </div>
@@ -75,7 +75,16 @@ class ManageBusinessController extends Controller
             'whatsapp'                  => 'required',
             'image_path'                => 'required',
             'status'                    => 'required',
+            'content'                   => 'image|file|max:1024',
+
         ]);
+        if ($request->file('content')) {
+            $imageName = $request->name . '.' . $request->content->extension();
+            $request->content->move(public_path('images/qr_code'), $imageName);
+            $validatedData['qr_code']  = "images/qr_code/" . $imageName;
+        }
+
+
         $myArray = explode(',', $validatedData['image_path']);
         $validatedData['image_path'] = "";
         foreach ($myArray as $value) {
@@ -129,6 +138,8 @@ class ManageBusinessController extends Controller
      */
     public function update(Request $request, Business $business)
     {
+        // return $request;
+        // ddd($request);
         $validatedData = $request->validate([
             'name'                      => 'required|max:255',
             'business_category_uuid'    => 'required|exists:business_categories,uuid',
@@ -143,7 +154,18 @@ class ManageBusinessController extends Controller
             'whatsapp'                  => 'required',
             'image_path'                => 'required',
             'status'                    => 'required',
+            'content'                   => 'image|file|max:1024',
+
         ]);
+        if ($request->file('content')) {
+            if ($request->oldImage) {
+                $oldImage = $business->qr_code;
+                unlink($oldImage);
+            }
+            $imageName = $request->name . '.' . $request->content->extension();
+            $request->content->move(public_path('images/qr_code'), $imageName);
+            $validatedData['qr_code']  = "images/qr_code/" . $imageName;
+        }
         $myArray = explode(',', $validatedData['image_path']);
         $validatedData['image_path'] = "";
         foreach ($myArray as $value) {
@@ -151,9 +173,10 @@ class ManageBusinessController extends Controller
         }
         $str = ltrim($validatedData['image_path'], ',');
         $validatedData['image_path'] = '[' . $str . ']';
-
+        unset($validatedData['content']);
+        // ddd($validatedData);
         Business::where('id', $business->id)->update($validatedData);
-        return redirect('/business')->with('success', 'News Edited!');
+        return redirect('/business')->with('success', 'UMKM Edited!');
     }
 
     /**
@@ -165,6 +188,10 @@ class ManageBusinessController extends Controller
     public function destroy(Business $business)
     {
         Business::destroy($business->id);
+        if ($business->qr_code) {
+            $qr_code = $business->qr_code;
+            unlink($qr_code);
+        }
         return redirect('/business/')->with('success', 'Business has been Deleted!');
     }
 }

@@ -10,23 +10,15 @@ use Illuminate\Support\Str;
 
 class ManageBusinessCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('dashboard.manage.businesscategory.index', [
             'title'         => 'Category',
-
-            // 'users'         => User::get()
-            // 'users'         => User::select('name', 'email', 'phone_number')->get()->paginate(7)->withQueryString()
         ]);
     }
     public function anyData()
     {
-        return Datatables::of(BusinessCategory::latest())
+        return Datatables::of(BusinessCategory::join('galleries', 'galleries.uuid', '=', 'business_categories.gallery_uuid')->get(['business_categories.*', 'galleries.path']))
             ->addColumn('action', function ($model) {
                 return '<a class="text-decoration-none" href="/business-category/' . $model->id . '/edit"><button class="btn btn-warning py-1 px-2 mr-1"><i class="icon-copy dw dw-pencil"></i></button></a>
                 <form action="/business-category/' . $model->id . '" method="post" id="delete-data" class="d-inline">' . csrf_field() .
@@ -37,8 +29,8 @@ class ManageBusinessCategoryController extends Controller
                 return '
                 <div class="user-info-dropdown">
                     <a class="dropdown-toggle" >
-                        <span class="user-icon">
-                            <img src=" http://digipark-admin.test/vendors/images/photo1.jpg" alt="">
+                        <span class="icon">
+                        <img src="'.env("APP_URL").'/'.$model->path.'" alt="">
                         </span>
                     </a>
                 </div>
