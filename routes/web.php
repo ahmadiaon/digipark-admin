@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminManageUserController;
 use App\Http\Controllers\AdminManageUserResourceController;
+use App\Http\Controllers\FinancialServiceController;
 use App\Http\Controllers\ManageAdminController;
 use App\Http\Controllers\ManageBusinessCategoryController;
 use App\Http\Controllers\ManageBusinessController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\ManageCommunityCategoryController;
 use App\Http\Controllers\ManageCommunityController;
 use App\Http\Controllers\ManageCommunityRegisterController;
 use App\Http\Controllers\ManageFinancialController;
+use App\Http\Controllers\ManageFinancialServiceController;
 use App\Http\Controllers\ManageGalerryController;
 use App\Http\Controllers\ManageNewsController;
 use App\Http\Controllers\ManageReviewController;
@@ -67,8 +69,10 @@ Route::get('/community-data', [ManageCommunityController::class, 'anyData'])->na
 Route::resource('/community-registers', ManageCommunityRegisterController::class);
 Route::get('/community-registers-data', [ManageCommunityRegisterController::class, 'anyData'])->name('community-registers-data');
 
-Route::resource('/financial', ManageFinancialController::class);
-Route::get('/financial-data', [ManageFinancialController::class, 'anyData'])->name('financial-data');
+Route::resource('/financials', ManageFinancialServiceController::class);
+Route::get('/financials-data', [ManageFinancialServiceController::class, 'anyData'])->name('financials-data');
+
 
 Route::resource('/review', ManageReviewController::class);
 Route::get('/review-data', [ManageReviewController::class, 'anyData'])->name('review-data');
+

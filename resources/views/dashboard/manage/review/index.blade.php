@@ -5,9 +5,7 @@
     <div class="pd-20" style="padding-bottom: 60px;">
         <h4 style="position: absolute;" class="text-blue h4">Data {{ $title }}</h4>
 
-        <a href="/financial/create">
-            <p class="btn btn-primary float-right">Tambah {{ $title }}</p>
-        </a>
+
     </div>
     @if(session()->has('success'))
     <div class="alert alert-primary" role="alert">
@@ -19,8 +17,6 @@
             <thead>
                 <tr>
                     <th width="20%">User</th>
-                    <th width="20%">UMKM</th>
-                    <th width="20%">Skor</th>
                     <th width="20%">Aktif</th>
                     <th width="12%">Aksi</th>
                 </tr>
@@ -75,9 +71,9 @@
      $('#myTablse').DataTable({
          processing: true,
          serverSide: true,
-         ajax: '{!! route('financial-data') !!}',
+         ajax: '{!! route('review-data') !!}',
          columns: [
-             { data: 'name', name: 'name' },
+             { data: 'user', name: 'user' },
              { data: 'status', name: 'status' },
              { data: 'action', name: 'action' }
          ]

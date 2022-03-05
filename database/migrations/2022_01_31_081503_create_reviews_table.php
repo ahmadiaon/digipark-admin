@@ -20,7 +20,7 @@ class CreateReviewsTable extends Migration
             $table->string('business_uuid')->nullable();
             $table->string('user_uuid')->nullable();
 
-            // secondary
+
             $table->text('image_path')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('value')->nullable();
@@ -29,11 +29,7 @@ class CreateReviewsTable extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('reviews');

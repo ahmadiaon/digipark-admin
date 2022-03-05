@@ -17,6 +17,7 @@ class CreateFinancialServicesTable extends Migration
             // primary
             $table->bigIncrements('id');
             $table->string('uuid')->unique();
+            // $table->string('category_uuid')->nullable();
 
             // secondary
             $table->string('name')->nullable();

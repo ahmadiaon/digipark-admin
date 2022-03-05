@@ -19,7 +19,8 @@
             <thead>
                 <tr>
                     <th width="20%">Nama</th>
-                    <th width="20%">Aktif</th>
+                    <th width="20%">Alamat</th>
+                    <th width="10%">Aktif</th>
                     <th width="12%">Aksi</th>
                 </tr>
             </thead>
@@ -73,9 +74,10 @@
      $('#myTablse').DataTable({
          processing: true,
          serverSide: true,
-         ajax: '{!! route('financial-data') !!}',
+         ajax: '{!! route('financials-data') !!}',
          columns: [
              { data: 'name', name: 'name' },
+             { data: 'address', name: 'address' },
              { data: 'status', name: 'status' },
              { data: 'action', name: 'action' }
          ]
@@ -87,7 +89,7 @@
     function myFunction(name,job) {
         // document.getElementById("demo").innerHTML = "Welcome " + name + ", the " + job + ".";
         $("#myModal").modal('show');
-        var action  = "/financial/"+name;
+        var action  = "/financials/"+name;
         document.getElementById("form_id").action = action;
         console.log(name);
     }
