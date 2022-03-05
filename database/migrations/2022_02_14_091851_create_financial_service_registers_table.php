@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReviewsTable extends Migration
+class CreateFinancialServiceRegistersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,22 @@ class CreateReviewsTable extends Migration
      */
     public function up()
     {
-        Schema::create('reviews', function (Blueprint $table) {
+        Schema::create('financial_service_registers', function (Blueprint $table) {
             // primary
             $table->bigIncrements('id');
             $table->string('uuid')->unique();
-            $table->string('business_uuid')->nullable();
+            $table->string('financial_service_uuid')->nullable();
             $table->string('user_uuid')->nullable();
 
             // secondary
-            $table->text('image_path')->nullable();
-            $table->text('description')->nullable();
-            $table->tinyInteger('value')->nullable();
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('email')->nullable();
+            $table->string('profession')->nullable();
             $table->tinyInteger('status')->nullable();
+
+            // timestamp
             $table->timestamps();
         });
     }
@@ -36,6 +40,6 @@ class CreateReviewsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reviews');
+        Schema::dropIfExists('financial_service_registers');
     }
 }
