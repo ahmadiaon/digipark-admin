@@ -76,3 +76,12 @@ Route::get('/financials-data', [ManageFinancialServiceController::class, 'anyDat
 Route::resource('/review', ManageReviewController::class);
 Route::get('/review-data', [ManageReviewController::class, 'anyData'])->name('review-data');
 
+Route::get('/template', function () {
+    return view(
+        'dashboard.manage.layouts.full',
+        [
+            "title"  => "home"
+        ]
+    );
+});
+

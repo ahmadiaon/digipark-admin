@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.template')
+@extends('dashboard.manage.layouts.form')
 @section('container')
 <div class="pd-20 card-box mb-30">
     <div class="clearfix">
@@ -61,13 +61,13 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Url Instagram</label>
-                            <input required name="instagram" type="text" class="form-control">
+                            <input name="instagram" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Url Facebook</label>
-                            <input required name="facebook" type="text" class="form-control">
+                            <input name="facebook" type="text" class="form-control">
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <div class="col-md-6 col-sm-12">
                         <div class="form-group">
                             <label>Url Youtube</label>
-                            <input required name="youtube" type="text" class="form-control">
+                            <input name="youtube" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="col-md-6 col-sm-12">
@@ -128,17 +128,6 @@
 </div>
 @endsection
 @section('javascripts')
-<script src="http://digipark-admin.test/vendors/scripts/core.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/script.min.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/process.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/layout-settings.js"></script>
-<!-- switchery js -->
-<script src="http://digipark-admin.test/src/plugins/switchery/switchery.min.js"></script>
-<!-- bootstrap-tagsinput js -->
-<script src="http://digipark-admin.test/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
-<!-- bootstrap-touchspin js -->
-<script src="http://digipark-admin.test/src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/advanced-components.js"></script>
 <script>
     var options = document.getElementById('select-meal-type').selectedOptions;
     var values = Array.from(options).map(({ value }) => value);

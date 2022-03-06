@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.template')
+@extends('dashboard.manage.layouts.form')
 @section('container')
 <div class="pd-20 card-box mb-30">
     <div class="clearfix">
@@ -10,70 +10,65 @@
                 @csrf
                 <div class="form-group">
                     <label>Judul Berita</label>
-                   <input required autofocus name="title" class="form-control   @error('title') is-invalid @enderror" value="{{ old('title',$news->title) }}" type="text" placeholder="Masukan Nama Lengkap" >
+                    <input required autofocus name="title" class="form-control   @error('title') is-invalid @enderror"
+                        value="{{ old('title',$news->title) }}" type="text" placeholder="Masukan Nama Lengkap">
                     @error('title')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                     @enderror
                 </div>
                 <div class="html-editor pd-20 card-box mb-30">
-					<h4 class="h4 text-blue">Konten Berita</h4>
-					<textarea required name="content" class="textarea_editor form-control border-radius-0" placeholder="Enter text ...">{{ $news->content}} </textarea>
-				</div>
+                    <h4 class="h4 text-blue">Konten Berita</h4>
+                    <textarea required name="content" class="form-control border-radius-0"
+                        placeholder="Enter text ...">{{ $news->content}} </textarea>
+                </div>
                 <div class="form-group">
                     <label>Multiple Select</label>
                     <input id="selects" name="image_path" type="hidden" value="">
-                    <select required id="select-meal-type"  class="custom-select2 form-control" multiple="multiple" style="width: 100%;">
+                    <select required id="select-meal-type" class="custom-select2 form-control" multiple="multiple"
+                        style="width: 100%;">
                         <option value="null">Pilih Media</option>
-                            @foreach($galleries as $gallery)
-                                @if(old('gallery' ) == $gallery->uuid)
-                                    <option selected value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
-                                @else
-                                    <option  value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
-                                @endif
-                                @foreach($image_paths as $image_path)
-                                    <option {{ ($image_path ==  '"'.$gallery->uuid.'"')? "selected":"" }} value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
-                                @endforeach
+                        @foreach($galleries as $gallery)
+                        @if(old('gallery' ) == $gallery->uuid)
+                        <option selected value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
+                        @else
+                        <option value="{{ $gallery->uuid }}">{{ $gallery->name }}</option>
+                        @endif
+                        @foreach($image_paths as $image_path)
+                        <option {{ ($image_path=='"' .$gallery->uuid.'"')? "selected":"" }} value="{{ $gallery->uuid
+                            }}">{{ $gallery->name }}</option>
+                        @endforeach
 
-                            @endforeach
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group ">
                     <label>Status</label>
                     <select required name="status" class="form-control  @error('status') is-invalid @enderror">
                         <option value="1" {{ (old("status",$news->status) == "1" ? "selected":"") }}>Aktif</option>
-                        <option value="0" {{ (old("status",$news->status) == "0" ? "selected":"") }}>Tidak Aktif</option>
+                        <option value="0" {{ (old("status",$news->status) == "0" ? "selected":"") }}>Tidak Aktif
+                        </option>
                     </select>
                     @error('status')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                     @enderror
                 </div>
-               <div class="modal-footer">
-                   <a href="/news/" class="d-inline">
-                        <button type="button" id="modalClose" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                   </a>
-                   <button id="submit"  class="btn btn-primary">Save changes</button>
-               </div>
-           </form>
+                <div class="modal-footer">
+                    <a href="/news/" class="d-inline">
+                        <button type="button" id="modalClose" class="btn btn-secondary"
+                            data-dismiss="modal">Close</button>
+                    </a>
+                    <button id="submit" class="btn btn-primary">Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 @endsection
 @section('javascripts')
-<script src="http://digipark-admin.test/vendors/scripts/core.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/script.min.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/process.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/layout-settings.js"></script>
-<!-- switchery js -->
-<script src="http://digipark-admin.test/src/plugins/switchery/switchery.min.js"></script>
-<!-- bootstrap-tagsinput js -->
-<script src="http://digipark-admin.test/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
-<!-- bootstrap-touchspin js -->
-<script src="http://digipark-admin.test/src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/advanced-components.js"></script>
 <script>
     var options = document.getElementById('select-meal-type').selectedOptions;
     var values = Array.from(options).map(({ value }) => value);

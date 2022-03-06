@@ -29,9 +29,7 @@ class ManageNewsController extends Controller
         return Datatables::of(News::latest())
             ->addColumn('action', function ($model) {
                 return '<a class="text-decoration-none" href="/news/' . $model->id . '/edit"><button class="btn btn-warning py-1 px-2 mr-1"><i class="icon-copy dw dw-pencil"></i></button></a>
-                <form action="/news/' . $model->id . '" method="post" id="delete-data" class="d-inline">' . csrf_field() .
-                    method_field('delete') . '<button onclick="JSconfirm()" type="submit" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>
-                </form>';
+                <button onclick="myFunction(' . $model->id . ')"  type="button" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>';
             })
             ->addColumn('image', function ($model) {
                 return '

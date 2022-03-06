@@ -32,7 +32,7 @@ class ManageUserController extends Controller
                 <div class="user-info-dropdown">
                     <a class="dropdown-toggle" >
                         <span class="user-icon">
-                            <img src=" http://digipark-admin.test/vendors/images/photo1.jpg" alt="">
+                            <img src=" http://digipark-admin.test/images/reviews/satu.png" alt="">
                         </span>
                     </a>
                 </div>
@@ -77,8 +77,6 @@ class ManageUserController extends Controller
         return view('dashboard.manage.user.edit', [
             'title'     => 'Edit',
             'user'      => $user
-            // 'users'         => User::get()
-            // 'users'         => User::select('name', 'email', 'phone_number')->get()->paginate(7)->withQueryString()
         ]);
     }
 
@@ -88,7 +86,6 @@ class ManageUserController extends Controller
 
         $rules = [
             'name'          => 'required|max:255',
-
             'email'         => 'required|email:dns',
         ];
 
@@ -105,7 +102,7 @@ class ManageUserController extends Controller
         }
 
         User::where('id', $user->id)->update($validateData);
-        return redirect('/users')->with('success', 'New Post Inserted!');
+        return redirect('/users')->with('success', 'New User Inserted!');
     }
 
 

@@ -1,4 +1,4 @@
-@extends('dashboard.manage.layouts.main_without_js')
+@extends('dashboard.manage.layouts.form')
 @section('container')
 <div class="pd-20 card-box mb-30">
     <div class="clearfix mb-20">
@@ -71,8 +71,4 @@
         </div>
     </div>
 </div>
-
-@endsection
-@section('javascript')
-
 @endsection

@@ -30,23 +30,8 @@ class ManageTourController extends Controller
         return Datatables::of(Tour::latest())
             ->addColumn('action', function ($model) {
                 return '<a class="text-decoration-none" href="/tour/' . $model->id . '/edit"><button class="btn btn-warning py-1 px-2 mr-1"><i class="icon-copy dw dw-pencil"></i></button></a>
-                <form action="/tour/' . $model->id . '" method="post" id="delete-data" class="d-inline">' . csrf_field() .
-                    method_field('delete') . '<button onclick="JSconfirm()" type="submit" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>
-                </form>';
+                <button onclick="myFunction(' . $model->id . ')"  type="button" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>';
             })
-            ->addColumn('image', function ($model) {
-                return '
-                <div class="user-info-dropdown">
-                    <a class="dropdown-toggle" >
-                        <span class="user-icon">
-                            <img src=" http://digipark-admin.test/vendors/images/photo1.jpg" alt="">
-                        </span>
-                    </a>
-                </div>
-                ';
-            })
-            ->escapeColumns('image')
-
             ->make(true);
     }
 
@@ -79,10 +64,10 @@ class ManageTourController extends Controller
             'city'                      => 'required',
             'province'                  => 'required',
             'location'                  => 'required',
-            'instagram'                 => 'required',
-            'facebook'                  => 'required',
-            'youtube'                   => 'required',
-            'image_path'                => 'required',
+            'instagram'                 => '',
+            'facebook'                  => '',
+            'youtube'                   => '',
+            'image_path'                => '',
             'status'                    => 'required',
         ]);
         $myArray = explode(',', $validatedData['image_path']);
@@ -144,9 +129,9 @@ class ManageTourController extends Controller
             'city'                      => 'required',
             'province'                  => 'required',
             'location'                  => 'required',
-            'instagram'                 => 'required',
-            'facebook'                  => 'required',
-            'youtube'                   => 'required',
+            'instagram'                 => '',
+            'facebook'                  => '',
+            'youtube'                   => '',
             'image_path'                => 'required',
             'status'                    => 'required',
         ]);

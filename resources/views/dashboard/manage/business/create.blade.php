@@ -1,4 +1,4 @@
-@extends('dashboard.layouts.template')
+@extends('dashboard.manage.layouts.form')
 @section('container')
 <div class="pd-20 card-box mb-30">
     <div class="clearfix">
@@ -174,30 +174,19 @@
 </div>
 @endsection
 @section('javascripts')
-<script src="http://digipark-admin.test/vendors/scripts/core.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/script.min.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/process.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/layout-settings.js"></script>
-<!-- switchery js -->
-<script src="http://digipark-admin.test/src/plugins/switchery/switchery.min.js"></script>
-<!-- bootstrap-tagsinput js -->
-<script src="http://digipark-admin.test/src/plugins/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
-<!-- bootstrap-touchspin js -->
-<script src="http://digipark-admin.test/src/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js"></script>
-<script src="http://digipark-admin.test/vendors/scripts/advanced-components.js"></script>
 <script>
     var options = document.getElementById('select-meal-type').selectedOptions;
     var values = Array.from(options).map(({ value }) => value);
 
 
     document.getElementById('submit').onclick = function() {
-  var select = document.getElementById('select-meal-type');
-  var selected = [...select.options]
-                    .filter(option => option.selected)
-                    .map(option => option.value);
-                    document.getElementById('selects').value = selected;
+    var select = document.getElementById('select-meal-type');
+    var selected = [...select.options]
+                        .filter(option => option.selected)
+                        .map(option => option.value);
+                        document.getElementById('selects').value = selected;
 
-}
+    }
 </script>
 <script>
     function previewImage(element){

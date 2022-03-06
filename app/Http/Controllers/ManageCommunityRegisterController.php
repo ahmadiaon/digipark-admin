@@ -20,9 +20,7 @@ class ManageCommunityRegisterController extends Controller
     {
         return Datatables::of(CommunityRegister::join('communities', 'communities.uuid', '=', 'community_registers.community_uuid')->get(['community_registers.*', 'community_registers.name as nama', 'communities.name']))
             ->addColumn('action', function ($model) {
-                return '<form action="/community/' . $model->id . '" method="post" id="delete-data" class="d-inline">' . csrf_field() .
-                    method_field('delete') . '<button onclick="JSconfirm()" type="submit" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>
-                </form>';
+                return '<button onclick="myFunction(' . $model->id . ')"  type="button" class="btn btn-danger  py-1 px-2"><i class="icon-copy dw dw-trash"></i></button>';
             })
 
 
@@ -86,6 +84,7 @@ class ManageCommunityRegisterController extends Controller
      */
     public function destroy(CommunityRegister $communityRegister)
     {
-        //
+        CommunityRegister::destroy($communityRegister->id);
+        return redirect('/community-registers')->with('success', 'Community Register has been Deleted!');
     }
 }
